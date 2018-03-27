@@ -1,0 +1,47 @@
+version: '3'
+
+services:
+    httpd:
+      build: .
+      ports:
+        - 127.0.0.1:80:80
+      restart: always
+      networks:
+        - default
+      tmpfs:
+        - /var/www/html/var/cache:exec,mode=777
+        - /var/www/html/var/log:exec,mode=777
+      volumes:
+        - ./project:/var/www/html
+        - ./apache/000-default.conf:/etc/apache2/sites-available/000-default.conf
+        - ./logs/apache/access.log:/var/log/apache2/access.log
+        - ./logs/apache/error.log:/var/log/apache2/error.log
+    mysql:
+      image: mysql:latest
+      environment:
+        MYSQL_DATABASE: project
+        MYSQL_USER: admin
+        MYSQL_PASSWORD: ABcd1234
+        MYSQL_ROOT_PASSWORD: docker
+      ports:
+        - 127.0.0.1:3306:3306
+      networks:
+        - default
+      expose:
+        - "3306"
+      volumes:
+        - ./mysql:/var/lib/mysql
+        - ./logs/mysql/error.log:/var/log/mysql/error.log
+    phpmyadmin:
+      image: phpmyadmin/phpmyadmin
+      ports:
+        - 127.0.0.1:8181:80
+      networks:
+        - default
+      environment:
+        PMA_USER: root
+        PMA_PASSWORD: docker
+        PMA_HOST: mysql
+
+networks:
+    default:
