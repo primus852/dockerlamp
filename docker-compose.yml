@@ -33,7 +33,7 @@ services:
         - ./logs/mysql:/var/log/mysql
         # Put .sql / .sql.gz to this folder to create new db every time
         - ./data:/docker-entrypoint-initdb.d
-        # or use persitent Database
+        # or use persistent Database
         # - ./mysql:/var/lib/mysql
     phpmyadmin:
       image: phpmyadmin/phpmyadmin
