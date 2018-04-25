@@ -14,8 +14,7 @@ services:
       volumes:
         - ./project:/var/www/html
         - ./apache/000-default.conf:/etc/apache2/sites-available/000-default.conf
-        - ./logs/apache/access.log:/var/log/apache2/access.log
-        - ./logs/apache/error.log:/var/log/apache2/error.log
+        - ./logs/apache:/var/log/apache2
     mysql:
       image: mysql:latest
       environment:
