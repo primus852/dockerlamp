@@ -37,6 +37,7 @@ RUN apt-get update && apt-get install -yq \
     iputils-ping \
     nodejs \
     npm \
+    unzip \
     locales \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
