@@ -1,6 +1,6 @@
 FROM ubuntu:18.04
 
-MAINTAINER t3kit
+MAINTAINER primus852
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -35,11 +35,14 @@ RUN apt-get update && apt-get install -yq \
     ghostscript \
     mysql-client \
     iputils-ping \
-    nodejs \
-    npm \
     unzip \
     locales \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
+    && apt-get clean
+
+# Install yarn
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+RUN apt-get update && apt-get install -yq yarn
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
