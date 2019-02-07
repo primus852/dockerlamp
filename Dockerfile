@@ -37,7 +37,8 @@ RUN apt-get update && apt-get install -yq \
     iputils-ping \
     unzip \
     locales \
-    && apt-get clean
+    gnupg2 \
+    && apt-get clean && apt-get autoremove
 
 # Install yarn
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
