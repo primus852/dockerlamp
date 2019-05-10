@@ -26,6 +26,7 @@ RUN apt-get update && apt-get install -yq \
     php7.2-xml \
     php7.2-zip \
     php7.2-intl \
+    php7.2-xdebug \
     php-imagick \
     # Install tools
     nano \
