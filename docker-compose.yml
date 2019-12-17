@@ -2,7 +2,7 @@ version: '3'
 
 services:
     httpd:
-      build: .
+      build: primus852/dockerlamp
       ports:
         - 127.0.0.1:80:80
       restart: always
@@ -29,9 +29,9 @@ services:
       volumes:
         - ./logs/mysql:/var/log/mysql
         # Put .sql / .sql.gz to this folder to create new db every time
-        - ./data:/docker-entrypoint-initdb.d
+        # - ./data:/docker-entrypoint-initdb.d
         # or use persistent Database
-        # - ./mysql:/var/lib/mysql
+        - ./mysql:/var/lib/mysql
     phpmyadmin:
       image: phpmyadmin/phpmyadmin
       ports:
